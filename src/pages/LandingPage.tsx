@@ -123,22 +123,18 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
 
       {/* Floating Pill Navbar - Scroll Aware */}
       <div className={`fixed top-6 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:max-w-2xl z-50 transition-all duration-500 transform ${isNavVisible ? 'translate-y-0 opacity-100' : '-translate-y-[150%] opacity-0'}`}>
-        <nav className="bg-white/80 backdrop-blur-xl rounded-full shadow-lg shadow-slate-200/50 border border-white pl-6 pr-2 py-2 flex items-center justify-between">
+        <nav className="bg-white/80 backdrop-blur-xl rounded-full shadow-lg shadow-slate-200/50 border border-white px-6 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 <span className="font-serif text-xl font-bold tracking-tight text-[#9bbecb] drop-shadow-sm" style={{ textShadow: '0 1px 1px rgba(0,0,0,0.1)' }}>Belluh</span>
             </div>
 
-            <div className="flex items-center gap-2">
-                <button onClick={onLogin} className="hidden sm:block px-3 py-2 rounded-full text-sm font-bold text-slate-500 hover:text-slate-900 transition-colors">Sign in</button>
-                <button onClick={onGetStarted} className="px-5 h-10 bg-[#f0addd] text-white rounded-full font-bold text-sm hover:bg-[#e57ec3] transition-all active:scale-95 shadow-md shadow-[#f0addd]/30">Start free</button>
-                <button 
-                    onClick={toggleMenu}
-                    aria-label="Open menu"
-                    className="bg-[#CDE9F2] text-cyan-900 w-10 h-10 rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md hover:shadow-lg"
-                >
-                    <Menu size={20} strokeWidth={2.5} />
-                </button>
-            </div>
+            <button 
+                onClick={toggleMenu}
+                aria-label="Open menu"
+                className="bg-[#CDE9F2] text-cyan-900 w-10 h-10 rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md hover:shadow-lg"
+            >
+                <Menu size={20} strokeWidth={2.5} />
+            </button>
         </nav>
       </div>
 
