@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, ArrowRight, Lock, Menu, X, Heart, Mic, Image as ImageIcon, CalendarHeart, Mail } from 'lucide-react';
+import { Sparkles, ArrowRight, Menu, X, Heart, Mic, Image as ImageIcon, CalendarHeart } from 'lucide-react';
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -9,12 +9,11 @@ interface LandingPageProps {
 }
 
 const EntryCard = ({ who, time, text, tone }: { who: string; time: string; text: string; tone: 'pink' | 'blue' }) => (
-  <div className={`flex-1 rounded-[2.5rem] p-8 border border-black/5 flex flex-col justify-between gap-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] hover:scale-[1.01] transition-all duration-500 ${tone === 'pink' ? 'bg-[#f7d8ee]' : 'bg-[#CDE9F2]'}`}>
-    <span className="text-5xl opacity-50 text-white font-serif leading-none">❝</span>
-    <p className={`font-serif text-lg leading-relaxed ${tone === 'pink' ? 'text-[#5e1c43]' : 'text-cyan-950'}`}>{text}</p>
+  <div className={`flex-1 rounded-[2.5rem] p-8 border border-black/5 flex flex-col justify-between gap-8 shadow-[0_2px_10px_rgba(0,0,0,0.02)] ${tone === 'pink' ? 'bg-[#f7d8ee]' : 'bg-[#CDE9F2]'}`}>
+        <p className={`font-serif text-lg leading-relaxed ${tone === 'pink' ? 'text-[#5e1c43]' : 'text-cyan-950'}`}>{text}</p>
     <div className="flex items-center gap-2 pt-4 border-t border-black/5">
       <div className="w-1.5 h-1.5 rounded-full bg-white"></div>
-      <div className={`text-[10px] font-bold uppercase tracking-widest ${tone === 'pink' ? 'text-[#831843]' : 'text-cyan-900'}`}>{who} · {time}</div>
+      <div className={`text-xs font-bold ${tone === 'pink' ? 'text-[#831843]' : 'text-cyan-900'}`}>{who}, {time}</div>
     </div>
   </div>
 );
@@ -47,7 +46,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
   };
 
   const menuItems = [
-    { label: 'How it works', action: () => scrollToSection('how') },
+    { label: 'See an example', action: () => scrollToSection('example') },
     { label: 'Features', action: () => scrollToSection('features') },
     { label: 'Privacy', action: () => scrollToSection('privacy') },
     { label: 'Our Why', action: () => { setIsMenuOpen(false); onGoToAbout(); } },
@@ -104,17 +103,17 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
       </div>
 
       {/* Hero */}
-      <section className="relative z-10 pt-44 pb-20 md:pt-56 md:pb-28 px-6">
+      <section className="relative z-10 pt-36 pb-14 md:pt-44 md:pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center animate-slide-up">
           <h1 className="text-5xl md:text-7xl font-serif font-medium leading-[1.1] mb-8 text-slate-900 tracking-tight drop-shadow-sm">
             <span className="text-[#9bbecb]">The AI journal</span> <br /> <span className="text-[#f0addd] italic">for couples.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed max-w-2xl mx-auto mb-12">
+          <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed max-w-2xl mx-auto mb-10">
             You each write a few lines a day. Every Sunday, Belluh reads both sides and gives you one thing to understand and one thing to try.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button onClick={onGetStarted} className="bl-focus w-full sm:w-auto px-10 py-4 bg-[#f0addd] text-white rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#e57ec3] transition-all hover:scale-105 active:scale-95 shadow-xl shadow-[#f0addd]/30">
-              <span>Start Your Journey</span><ArrowRight size={16} />
+              <span>Start free</span><ArrowRight size={16} />
             </button>
             <button onClick={onLogin} className="bl-focus w-full sm:w-auto px-10 py-4 bg-white/80 backdrop-blur-sm text-slate-600 border border-white rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-[#f0addd] hover:shadow-lg transition-all">
               I have an account
@@ -125,67 +124,38 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
       </section>
 
       {/* Demo: two sides of one evening, then Sunday's insight */}
-      <section className="relative z-10 px-6 pb-24 pt-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-6 tracking-tighter">Two sides of the same day.</h2>
-            <p className="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-light">
-              Maya and Dan each wrote about Tuesday's dinner. Neither saw the other's entry. Belluh saw both.
-            </p>
+      <section id="example" className="relative z-10 px-6 pb-28 scroll-mt-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <EntryCard tone="pink" who="Maya" time="Tue 10:42 pm" text="He was quiet at dinner again. I asked if he was okay and he said “fine.” I can't tell if it's work or me." />
+            <EntryCard tone="blue" who="Dan" time="Tue 11:15 pm" text="Brutal day. Didn't want to bring it home, so I said nothing. I could tell Maya was hurt." />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div className="md:col-span-4 flex flex-col gap-6">
-              <EntryCard tone="pink" who="Maya" time="Tue 10:42 pm" text="He was quiet at dinner again. I asked if he was okay and he said “fine.” I can't tell if it's work or me." />
-              <EntryCard tone="blue" who="Dan" time="Tue 11:15 pm" text="Brutal day. Didn't want to bring it home, so I said nothing. I could tell Maya was hurt." />
-            </div>
-
-            <div className="md:col-span-8 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden min-h-[400px]">
-              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#CDE9F2]/30 to-transparent rounded-bl-full opacity-50 pointer-events-none"></div>
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-8">
+          <div className="mt-6 bg-white rounded-[2.5rem] p-8 md:p-12 border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#CDE9F2]/30 to-transparent rounded-bl-full opacity-50 pointer-events-none"></div>
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12 items-end">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-white border border-slate-100 rounded-full flex items-center justify-center shadow-sm text-[#f0addd]">
                     <Sparkles size={18} className="fill-[#f0addd]" />
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Sunday Insight</span>
+                  <span className="text-sm font-bold text-slate-400">Sunday, from Belluh</span>
                 </div>
-                <h3 className="text-3xl md:text-5xl font-serif text-slate-900 leading-[1.15] mb-6 tracking-tight">
+                <h3 className="text-3xl md:text-[2.75rem] font-serif text-slate-900 leading-[1.18] mb-5 tracking-tight">
                   “Dan went quiet to protect you. Maya read the quiet as distance.”
                 </h3>
-                <p className="text-lg text-slate-500 leading-relaxed max-w-2xl font-light">
-                  You both wrote about the same dinner, and it happened twice this week.
-                </p>
+                <p className="text-lg text-slate-500 leading-relaxed font-light">You both wrote about the same dinner, and it happened twice this week.</p>
               </div>
-              <div className="relative z-10 mt-10 bg-[#fcfcfc] border border-slate-100 rounded-3xl p-6 flex gap-4 items-start">
+              <div className="bg-[#fcfcfc] border border-slate-100 rounded-3xl p-6 flex gap-4 items-start">
                 <div className="w-8 h-8 shrink-0 rounded-full bg-[#f0addd] flex items-center justify-center text-white"><Heart size={14} className="fill-white" /></div>
                 <div>
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Try this week</div>
+                  <div className="text-sm font-bold text-slate-400 mb-1">Try this week</div>
                   <p className="font-serif text-lg leading-relaxed text-slate-800">Before going quiet, Dan says “Rough day, I need ten minutes.” That's all.</p>
                 </div>
               </div>
             </div>
           </div>
-          <p className="mt-6 text-center text-sm text-slate-400">An example week. Your insights come from your own entries.</p>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section id="how" className="relative z-10 py-24 px-6 scroll-mt-24">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-serif font-semibold text-slate-900 mb-16 tracking-tighter text-center">Two minutes a day.</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { t: 'Invite your partner', d: 'Send one link. Your entries live in a space only the two of you share.' },
-              { t: 'Write, say or snap it', d: 'A few lines, a voice note Belluh transcribes, or a photo. Each entry is shared or private.' },
-              { t: 'Read Sunday’s insight', d: 'One pattern Belluh noticed across both your weeks, and one small thing to try.' },
-            ].map((s, i) => (
-              <div key={s.t} className="bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.06)]">
-                <span className="text-xs font-bold text-[#9bbecb]">0{i + 1}</span>
-                <h3 className="mt-4 text-2xl md:text-3xl font-serif font-semibold text-slate-900 tracking-tight">{s.t}</h3>
-                <p className="mt-4 text-lg text-slate-500 leading-relaxed font-light">{s.d}</p>
-              </div>
-            ))}
-          </div>
+          <p className="mt-6 text-center text-sm text-slate-400">An example week. Neither saw the other's entry. Your insights come from your own.</p>
         </div>
       </section>
 
@@ -194,13 +164,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
         <div className="max-w-7xl mx-auto space-y-32">
 
           {/* The future letter */}
-          <div className="group relative bg-white rounded-[3rem] p-8 md:p-20 shadow-2xl shadow-slate-200/50 border border-white overflow-hidden transition-transform duration-700 hover:scale-[1.01]">
-            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-b from-[#f0addd]/20 to-transparent rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+          <div className="group relative bg-white rounded-[3rem] p-8 md:p-20 shadow-2xl shadow-slate-200/50 border border-white overflow-hidden">
+            <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-b from-[#f0addd]/20 to-transparent rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 opacity-60"></div>
             <div className="relative z-10 md:w-1/2">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full mb-8">
-                <Mail size={14} className="text-[#f0addd]" />
-                <span className="text-xs font-bold uppercase tracking-widest text-slate-500">Future Letter</span>
-              </div>
               <h2 className="text-5xl md:text-7xl font-serif font-semibold tracking-tighter text-slate-900 mb-6">
                 A letter from <br /> <span className="text-[#9bbecb]">five years on.</span>
               </h2>
@@ -209,7 +175,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
               </p>
             </div>
             <div className="mt-16 md:absolute md:top-1/2 md:right-20 md:-translate-y-1/2 md:w-[26rem]">
-              <div className="bg-white/80 backdrop-blur-xl border border-white/60 p-8 rounded-3xl shadow-apple transform rotate-3 transition-transform duration-700 group-hover:rotate-0 group-hover:scale-105">
+              <div className="bg-white/80 backdrop-blur-xl border border-white/60 p-8 rounded-3xl shadow-apple transform rotate-3 transition-transform duration-700">
                 <p className="font-serif italic text-lg leading-relaxed text-slate-800">
                   Dear us. Remember the year Dan learned to say “I need ten minutes” instead of disappearing? It sounds small. It was the year we stopped guessing at each other.
                 </p>
@@ -218,15 +184,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
           </div>
 
           {/* Privacy */}
-          <div id="privacy" className="group relative bg-[#CDE9F2] rounded-[3rem] p-8 md:p-20 shadow-2xl overflow-hidden text-slate-900 transition-transform duration-700 hover:scale-[1.01] scroll-mt-24">
+          <div id="privacy" className="group relative bg-[#CDE9F2] rounded-[3rem] p-8 md:p-20 shadow-2xl overflow-hidden text-slate-900 scroll-mt-24">
             <div className="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-white/40 rounded-full blur-[80px] pointer-events-none animate-float"></div>
             <div className="absolute bottom-[-10%] left-[-20%] w-[500px] h-[500px] bg-white/30 rounded-full blur-[60px] pointer-events-none animate-pulse-slow"></div>
             <div className="relative z-10 flex flex-col md:flex-row items-center gap-12 md:gap-24">
               <div className="flex-1 text-center md:text-left">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/60 backdrop-blur-sm rounded-full mb-8 border border-white/40 shadow-sm">
-                  <Lock size={14} className="text-cyan-700" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-cyan-900">Private Vault</span>
-                </div>
                 <h2 className="text-5xl md:text-7xl font-serif font-semibold tracking-tighter text-cyan-950 mb-6">
                   Your safe <br /> <span className="text-cyan-700">haven.</span>
                 </h2>
@@ -259,7 +221,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
 
           {/* Dates + capture */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-[#fcfcfc] rounded-[3rem] p-10 md:p-16 border border-slate-100 shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
+            <div className="bg-[#fcfcfc] rounded-[3rem] p-10 md:p-16 border border-slate-100 shadow-xl relative overflow-hidden group">
               <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-8 border border-slate-100 shadow-sm">
                 <CalendarHeart size={24} className="text-slate-900" />
               </div>
@@ -270,7 +232,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
                 <span className="px-4 py-2 bg-white border border-slate-100 rounded-full text-xs font-bold text-slate-500 shadow-sm">First date, 3 years ago today</span>
               </div>
             </div>
-            <div className="bg-[#fcfcfc] rounded-[3rem] p-10 md:p-16 border border-slate-100 shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all duration-500">
+            <div className="bg-[#fcfcfc] rounded-[3rem] p-10 md:p-16 border border-slate-100 shadow-xl relative overflow-hidden group">
               <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center mb-8 border border-slate-100 shadow-sm">
                 <Mic size={24} className="text-slate-900" />
               </div>
@@ -297,7 +259,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
           <p className="text-xl text-slate-500 font-light leading-relaxed mb-10">Write one line about today. Send your partner the link. Your first insight arrives on Sunday.</p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button onClick={onGetStarted} className="bl-focus w-full sm:w-auto px-10 py-4 bg-[#f0addd] text-white rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#e57ec3] transition-all hover:scale-105 active:scale-95 shadow-xl shadow-[#f0addd]/30">
-              <span>Start Your Journey</span><ArrowRight size={16} />
+              <span>Start free</span><ArrowRight size={16} />
             </button>
             <button onClick={onLogin} className="bl-focus w-full sm:w-auto px-10 py-4 bg-white/80 backdrop-blur-sm text-slate-600 border border-white rounded-full font-bold text-sm hover:bg-white hover:text-[#f0addd] hover:shadow-lg transition-all">
               I have an account
