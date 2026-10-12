@@ -1,4 +1,6 @@
 # env files
 .env
 .env.local
-.env.*.local
+.env.*.localnode_modules/
+dist/
+*.tsbuildinfo
