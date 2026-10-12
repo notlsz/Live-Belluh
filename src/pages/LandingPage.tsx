@@ -26,7 +26,6 @@ const LogoItem = ({ org }: { org: typeof ORGANIZATIONS[0] }) => {
     <img 
       src={`https://www.google.com/s2/favicons?domain=${org.domain}&sz=128`} 
       alt={org.name} 
-      loading="lazy"
       onError={() => setError(true)}
       className="max-h-12 max-w-full w-auto opacity-40 hover:opacity-100 hover:scale-110 transition-all duration-500 grayscale hover:grayscale-0 object-contain" 
     />
