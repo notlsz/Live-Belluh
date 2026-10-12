@@ -63,11 +63,13 @@ const LogoMarquee = () => (
 const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShowLegal, onGoToAbout }) => {
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      setPastHero(currentScrollY > 520);
       
       if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
         setIsNavVisible(false);
@@ -128,6 +130,15 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
                 <span className="font-serif text-xl font-bold tracking-tight text-[#9bbecb] drop-shadow-sm" style={{ textShadow: '0 1px 1px rgba(0,0,0,0.1)' }}>Belluh</span>
             </div>
 
+            <div className="flex items-center gap-2">
+            <button
+                onClick={onGetStarted}
+                tabIndex={pastHero ? 0 : -1}
+                aria-hidden={!pastHero}
+                className={`overflow-hidden whitespace-nowrap h-10 bg-[#f0addd] text-white rounded-full font-bold text-sm hover:bg-[#e57ec3] shadow-md shadow-[#f0addd]/30 transition-all duration-500 ${pastHero ? 'max-w-[140px] px-5 opacity-100' : 'max-w-0 px-0 opacity-0 pointer-events-none'}`}
+            >
+                Start free
+            </button>
             <button 
                 onClick={toggleMenu}
                 aria-label="Open menu"
@@ -135,6 +146,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
             >
                 <Menu size={20} strokeWidth={2.5} />
             </button>
+            </div>
         </nav>
       </div>
 
@@ -184,14 +196,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
       </div>
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-44 pb-20 md:pt-56 md:pb-32 px-6">
+      <section className="relative z-10 pt-36 pb-14 md:pt-44 md:pb-16 px-6">
          <div className="max-w-4xl mx-auto text-center animate-slide-up">
              
              <h1 className="text-5xl md:text-7xl font-serif font-medium leading-[1.1] mb-8 text-slate-900 tracking-tight drop-shadow-sm">
                  <span className="text-[#9bbecb]">The AI journal</span> <br /> <span className="text-[#f0addd] italic">for couples.</span>
              </h1>
              
-             <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed max-w-2xl mx-auto mb-12">
+             <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed max-w-2xl mx-auto mb-10">
                  You each write a few lines a day. Every Sunday, Belluh reads both sides and tells you one thing to understand and one thing to try.
              </p>
 
@@ -213,22 +225,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
          </div>
       </section>
 
-      {/* Marquee Section */}
-      <LogoMarquee />
-
       {/* Visual Demo Section */}
-      <section className="relative z-10 px-6 pb-24 pt-32">
+      <section id="example" className="relative z-10 px-6 pb-28 scroll-mt-24">
           <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-16">
-                   <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-6 tracking-tighter">
-                      Intelligence, applied to intimacy.
-                   </h2>
-                   <p className="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-light">
-                      Belluh turns thousands of small moments into a cohesive understanding of your shared life.
-                   </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 min-h-[600px]">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                   
                   {/* Card 1: The AI Analysis */}
                   <div className="md:col-span-8 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group hover:scale-[1.005] transition-all duration-700 min-h-[400px]">
@@ -269,9 +269,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
                       <div className="flex-1 bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group hover:scale-[1.01] transition-transform duration-500 min-h-[250px]">
                           
                           <div className="relative z-10 flex justify-between items-start">
-                              <span className="text-xs font-bold uppercase tracking-widest text-slate-400">Synergy Score</span>
+                              <span className="text-xs font-bold uppercase tracking-widest text-slate-400">This week</span>
                               <div className="px-3 py-1 bg-[#f0addd]/10 text-[#c06ba5] rounded-full text-[10px] font-bold flex items-center gap-1">
-                                  <TrendingUp size={12} /> +12%
+                                  <TrendingUp size={12} /> Warming
                               </div>
                           </div>
 
@@ -287,7 +287,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
 
                           <div className="relative z-10">
                               <div className="text-6xl font-sans font-semibold tracking-tighter text-slate-900">94</div>
-                              <p className="text-sm text-slate-500 mt-1 font-medium">Exceptional Harmony</p>
+                              <p className="text-sm text-slate-500 mt-1 font-medium">Clear skies ahead</p>
                           </div>
                       </div>
 
@@ -295,6 +295,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
               </div>
           </div>
       </section>
+
+      {/* Marquee Section */}
+      <LogoMarquee />
 
       {/* Visual Demo Section - Apple Style Immersive Cards */}
       <section id="features" className="relative z-10 py-32 px-6 bg-slate-50/50">
