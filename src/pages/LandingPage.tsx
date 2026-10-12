@@ -71,11 +71,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
       const currentScrollY = window.scrollY;
       setPastHero(currentScrollY > 520);
       
-      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
-        setIsNavVisible(false);
-      } else {
-        setIsNavVisible(true);
-      }
+      setIsNavVisible(true);
       
       lastScrollY.current = currentScrollY;
     };
@@ -125,7 +121,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
 
       {/* Floating Pill Navbar - Scroll Aware */}
       <div className={`fixed top-6 left-4 right-4 md:left-1/2 md:-translate-x-1/2 md:max-w-2xl z-50 transition-all duration-500 transform ${isNavVisible ? 'translate-y-0 opacity-100' : '-translate-y-[150%] opacity-0'}`}>
-        <nav className="bg-white/80 backdrop-blur-xl rounded-full shadow-lg shadow-slate-200/50 border border-white px-6 py-3 flex items-center justify-between">
+        <nav className="bg-white/90 backdrop-blur-xl rounded-full shadow-lg shadow-slate-200/50 border border-white px-6 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                 <span className="font-serif text-xl font-bold tracking-tight text-[#9bbecb] drop-shadow-sm" style={{ textShadow: '0 1px 1px rgba(0,0,0,0.1)' }}>Belluh</span>
             </div>
@@ -189,25 +185,25 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
                        onClick={() => { toggleMenu(); onGetStarted(); }}
                        className="w-full py-4 rounded-full bg-[#9bbecb] text-white font-bold hover:bg-[#8aaab7] transition-colors shadow-xl text-lg flex items-center justify-center gap-2"
                    >
-                       Join Belluh <ArrowRight size={18} />
+                       Start free <ArrowRight size={18} />
                    </button>
                </div>
           </div>
       </div>
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-36 pb-14 md:pt-44 md:pb-16 px-6">
+      <section className="relative z-10 pt-32 pb-10 md:pt-36 md:pb-12 px-6">
          <div className="max-w-4xl mx-auto text-center animate-slide-up">
              
-             <h1 className="text-5xl md:text-7xl font-serif font-medium leading-[1.1] mb-8 text-slate-900 tracking-tight drop-shadow-sm">
+             <h1 className="text-5xl md:text-7xl font-serif font-medium leading-[1.1] mb-6 text-slate-900 tracking-tight drop-shadow-sm">
                  <span className="text-[#9bbecb]">The AI journal</span> <br /> <span className="text-[#f0addd] italic">for couples.</span>
              </h1>
              
-             <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed max-w-2xl mx-auto mb-10">
+             <p className="text-xl md:text-2xl text-slate-500 font-light leading-relaxed max-w-2xl mx-auto mb-8">
                  You each write a few lines a day. Every Sunday, Belluh reads both sides and tells you one thing to understand and one thing to try.
              </p>
 
-             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4">
                  <button 
                     onClick={onGetStarted}
                     className="w-full sm:w-auto px-10 py-4 bg-[#f0addd] text-white rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#e57ec3] transition-all hover:scale-105 active:scale-95 shadow-xl shadow-[#f0addd]/30"
@@ -217,7 +213,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
                  </button>
                  <button 
                     onClick={onLogin}
-                    className="w-full sm:w-auto px-10 py-4 bg-white/80 backdrop-blur-sm text-slate-600 border border-white rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-[#f0addd] hover:shadow-lg transition-all"
+                    className="w-auto px-6 py-2 sm:px-10 sm:py-4 sm:bg-white/80 sm:backdrop-blur-sm text-slate-600 sm:border sm:border-white rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-white hover:text-[#f0addd] sm:hover:shadow-lg transition-all"
                  >
                      I have an account
                  </button>
@@ -231,11 +227,11 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted, onLogin, onShow
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                   
                   {/* Card 1: The AI Analysis */}
-                  <div className="md:col-span-8 bg-white rounded-[2.5rem] p-10 border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group hover:scale-[1.005] transition-all duration-700 min-h-[400px]">
+                  <div className="md:col-span-8 bg-white rounded-[2.5rem] p-8 md:p-10 border border-slate-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group hover:scale-[1.005] transition-all duration-700 min-h-[400px]">
                       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#CDE9F2]/30 to-transparent rounded-bl-full opacity-50 pointer-events-none"></div>
                       
                       <div className="relative z-10">
-                          <div className="flex items-center gap-3 mb-8">
+                          <div className="flex items-center gap-3 mb-6">
                               <div className="w-10 h-10 bg-white border border-slate-100 rounded-full flex items-center justify-center shadow-sm text-[#f0addd]">
                                   <Sparkles size={18} className="fill-[#f0addd]" />
                               </div>
